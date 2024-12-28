@@ -1,16 +1,61 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Days of a Year</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+    }
+    input, button {
+      margin: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+  <h1>Find Days in a Year</h1>
+  <label for="yearInput">Enter a Year:</label>
+  <input type="number" id="yearInput" min="1" max="9999" placeholder="e.g., 2024">
+  <button onclick="calculateDays()">Get Days</button>
+  <div id="result"></div>
 
+  <script>
+    function daysOfAYear(year) {
+      // Check if the year is a leap year
+      if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
+        return 366; // Leap year
+      } else {
+        return 365; // Non-leap year
+      }
+    }
+
+    function calculateDays() {
+      const yearInput = document.getElementById('yearInput').value;
+      const resultDiv = document.getElementById('result');
+
+      // Validate input
+      if (yearInput === '' || yearInput < 1 || yearInput > 9999) {
+        resultDiv.textContent = 'Please enter a valid year between 1 and 9999.';
+        resultDiv.style.color = 'red';
+        return;
+      }
+
+      const year = parseInt(yearInput, 10);
+      const days = daysOfAYear(year);
+      resultDiv.textContent = `The year ${year} has ${days} days.`;
+      resultDiv.style.color = 'green';
+    }
+  </script>
 </body>
-
 </html>
+
